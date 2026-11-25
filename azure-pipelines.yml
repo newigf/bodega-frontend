@@ -12,3 +12,8 @@ steps:
 
   - script: docker build -t bodega-frontend:$(Build.BuildId) .
     displayName: Construir la imagen Docker
+
+  - script: curl -fsS -X POST "$DEPLOY_HOOK_URL"
+    displayName: Desplegar el frontend en Render
+    env:
+      DEPLOY_HOOK_URL: $(DEPLOY_HOOK_URL)
